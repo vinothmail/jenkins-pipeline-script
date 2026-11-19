@@ -10,7 +10,7 @@ pipeline {
         user_name = "Vinoth Padmanaban"
         location  = "Chennai"
         email     = "vinoth.mail@gmail.com"
-        branch    = "main"
+        branch    = "master"
     }
 
     stages {
