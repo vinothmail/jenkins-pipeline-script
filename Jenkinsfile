@@ -53,6 +53,7 @@ pipeline {
                 writeFile file: 'report.txt',
                     text: "Location: ${location}, ${email}"
                 archiveArtifacts artifacts: 'report.txt'
+                bat 'type report.txt'
                    }
         }
         stage('Write File') {
