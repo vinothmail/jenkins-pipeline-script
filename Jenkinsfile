@@ -20,6 +20,7 @@ pipeline {
             steps {
                 echo 'building'
                 echo "${app_name}"
+                powershell 'Get-Date'
             }
             post {
                 success {
