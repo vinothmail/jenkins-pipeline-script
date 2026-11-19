@@ -50,8 +50,10 @@ pipeline {
         stage('Report') {
             steps {
                 echo 'reporting...'
-                echo "${location}, ${email}"
-            }
+                writeFile file: 'report.txt',
+                    text: "Location: ${location}, ${email}"
+                archiveArtifacts artifacts: 'report.txt'
+                   }
         }
         stage('Write File') {
             steps {
