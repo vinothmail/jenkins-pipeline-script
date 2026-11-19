@@ -55,6 +55,9 @@ pipeline {
         }
 
         stage('Deploy') {
+            options {
+                timeout(time: 3, unit: 'MINUTES')
+                        }
             input {
                 message 'Deploy to production?'
                 ok 'Yes, deploy'
