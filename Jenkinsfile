@@ -20,8 +20,7 @@ pipeline {
             steps {
                 echo 'building'
                 echo "${app_name}"
-                powershell 'Get-Date'
-            }
+             }
             post {
                 success {
                     echo 'build completed.'
@@ -54,7 +53,16 @@ pipeline {
                 echo "${location}, ${email}"
             }
         }
+        stage('Write File') {
+            steps {
+                writeFile file: 'sample.txt', text: 'Welcome to Jenkins'
 
+                script {
+                    def content = readFile('sample.txt')
+                    echo content
+                }
+            }
+        }
         stage('Deploy') {
             options {
                 timeout(time: 3, unit: 'MINUTES')
