@@ -55,8 +55,11 @@ pipeline {
         }
         stage('Write File') {
             steps {
-                writeFile file: 'sample.txt', text: 'Welcome to Jenkins'
-
+                writeFile file: 'sample.txt', text: '''
+Application: REAPER
+Version: 1.7
+Environment: UAT
+'''
                 script {
                     def content = readFile('sample.txt')
                     echo content
