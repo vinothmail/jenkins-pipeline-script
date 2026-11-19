@@ -4,13 +4,15 @@ pipeline {
     triggers {
         pollSCM('H/2 * * * *')
     }
+     parameters {
+        string(name: 'BRANCH', defaultValue: 'main', description: 'Branch name')
+    }
 
     environment {
         app_name  = "Reaper"
         user_name = "Vinoth Padmanaban"
         location  = "Chennai"
         email     = "vinoth.mail@gmail.com"
-        branch    = "master"
     }
 
     stages {
@@ -31,13 +33,12 @@ pipeline {
         }
 
         stage('Test') {
-            when {
-                expression { env.GIT_BRANCH in ['origin/main', 'origin/master', 'main', 'master'] }
+           when {
+                expression { params.BRANCH == 'main' || params.BRANCH == 'master' }
             }
             steps {
-                echo 'Testing has started'
-                echo "${branch}"
-            }
+                echo "testing branch ${params.BRANCH}"
+            }            
             post {
                 success {
                     echo 'testing completed.'
