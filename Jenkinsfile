@@ -24,7 +24,7 @@ pipeline {
             post {
                 success {
                     echo 'build completed.'
-                    echo 'Authorized by: ${user_name}'
+                    echo 'Authorized by:' "${user_name}"
                     bat 'date /t'
                 }
                 failure {
