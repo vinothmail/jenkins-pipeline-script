@@ -86,7 +86,7 @@ Environment: UAT
                 echo 'deploying...'
                 echo "Authorized by: ${APPROVER}"
                 writeFile file: 'deploy-audit.txt', text: """\
-        ==================================================        
+        ====================================================        
         
         App        : ${app_name}
         Build      : ${env.BUILD_NUMBER}
@@ -95,7 +95,7 @@ Environment: UAT
         Time       : ${new Date()}
         Build URL  : ${env.BUILD_URL}
         
-        ==================================================
+        =====================================================
         """
                 archiveArtifacts artifacts: 'deploy-audit.txt', fingerprint: true
             }
