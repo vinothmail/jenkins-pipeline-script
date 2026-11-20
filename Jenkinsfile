@@ -76,10 +76,31 @@ Environment: UAT
             input {
                 message 'Deploy to production?'
                 ok 'Yes, deploy'
+                subnitter 'Vinoth,admin'
+                submitterParameter 'APPROVER'
+                parameters {
+                    string(name: 'REASON', defaultValue: '', description: 'why deploy?')
+            }
             }
             steps {
                 echo 'deploying...'
+                echo "Authorized by: ${APPROVER}"
+                writeFile file: 'deploy-audit.txt', text: """\
+        App        : ${app_name}
+        Build      : ${env.BUILD_NUMBER}
+        Approver   : ${APPROVER}
+        Reason     : ${REASON}
+        Time       : ${new Date()}
+        Build URL  : ${env.BUILD_URL}
+        """
+                archiveArtifacts artifacts: 'deploy-audit.txt', fingerprint: true
             }
+            post {
+                aborted {
+                     echo 'Deploy was aborted or timed out.'
         }
     }
+}
+   
+    
 }
