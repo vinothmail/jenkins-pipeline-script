@@ -19,7 +19,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'building'
-                echo "${app_name}"
+                echo "${env.app_name}"
              }
             post {
                 success {
@@ -76,7 +76,7 @@ Environment: UAT
             input {
                 message 'Deploy to production?'
                 ok 'Yes, deploy'
-                subnitter 'Vinoth,admin'
+                submitter 'Vinoth,admin'
                 submitterParameter 'APPROVER'
                 parameters {
                     string(name: 'REASON', defaultValue: '', description: 'why deploy?')
@@ -98,9 +98,8 @@ Environment: UAT
             post {
                 aborted {
                      echo 'Deploy was aborted or timed out.'
-        }
-    }
-}
-   
-    
+                        }
+                    }
+                }
+    }   
 }
